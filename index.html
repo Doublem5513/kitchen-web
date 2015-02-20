@@ -1,0 +1,49 @@
+<html>
+	<head>
+		<title>Ljudi za stolom</title>
+		<script src="jquery-1.11.2.min.js"></script>
+		<script src="jcanvas.min.js"></script>
+		<script>
+		
+		$(document).ready(function(){
+		
+		$('canvas').drawRect({
+		  fillStyle: '#000',
+		  x: 150, y: 180,
+		  width: 120,
+		  height: 230
+		});
+					
+			$.get( "http://localhost:9090/VideoAnalyzerService/getActiveSectors", function( data ) {
+			  this.activeSectors = data;
+			  
+			
+			this.activeSectors.sectors.forEach(function(sector){
+				
+					$("canvas").drawArc({
+					  draggable: false,
+					  fillStyle: "green",
+					  x: sector.y*40, y: sector.x*40,
+					  radius: 5
+					});
+				
+				});
+			});			
+			
+
+			
+
+			$("#data").html("ok");
+			
+			
+		});
+
+
+		</script>
+	</head>
+	<body>
+		<h2>Ljudi za stolom</h2>
+		<canvas id="myCanvas" width="800" height="600"></canvas>
+
+	</body>
+</html>
